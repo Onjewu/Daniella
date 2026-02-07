@@ -1,0 +1,81 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: 12px;
+}
+
+/* Header */
+.header h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+}
+
+.header p {
+    font-size: clamp(1rem, 4vw, 1.6rem);
+}
+
+/* Gallery */
+.gallery {
+    display: flex;
+    gap: 12px;
+    padding: 10px 5px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.gallery-item {
+    min-width: 220px;
+    height: 300px;
+    scroll-snap-align: center;
+}
+
+/* Question card */
+.question-section {
+    padding: 35px 20px;
+    margin: 30px auto;
+    max-width: 90%;
+}
+
+.question-section h2 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+}
+
+.question-text {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+}
+
+/* Buttons */
+.buttons-container {
+    gap: 15px;
+}
+
+.btn {
+    padding: 16px 28px;
+    font-size: clamp(1rem, 4vw, 1.4rem);
+    min-width: 140px;
+}
+
+/* Success message */
+.success-message h2 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+}
+
+.success-message p {
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
+}
+
+/* Confetti lighter */
+.confetti {
+    width: 8px;
+    height: 8px;
+}
+
+/* Disable heavy hover effects on touch devices */
+@media (hover: none) {
+    .gallery-item:hover,
+    .btn:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
