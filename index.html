@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Daniella ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Floating hearts background */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            animation: float 8s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 30px 20px 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 4em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #e91e63 0%, #f50057 50%, #c2185b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s infinite;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(233, 30, 99, 0.3);
+        }
+
+        .header p {
+            font-size: 1.6em;
+            font-style: italic;
+            color: #666;
+            font-weight: 300;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Gallery Grid - Always 2 columns side by side */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 0 auto 50px;
+            max-width: 1100px;
+            padding: 0 15px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        /* 3 columns only on large screens */
+        @media (min-width: 992px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            padding-top: 133%; /* 4:3 aspect ratio */
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(233, 30, 99, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 60px rgba(233, 30, 99, 0.35);
+        }
+
+        /* Image container */
+        .gallery-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Gradient backgrounds for each item */
+        .gallery-item:nth-child(1) .gallery-content {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .gallery-item:nth-child(2) .gallery-content {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+
+        .gallery-item:nth-child(3) .gallery-content {
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+        }
+
+        .gallery-item:nth-child(4) .gallery-content {
+            background: linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%);
+        }
+
+        .gallery-item:nth-child(5) .gallery-content {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+        }
+
+        .gallery-item:nth-child(6) .gallery-content {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        /* Image styling - ADD YOUR IMAGES HERE */
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            display: block;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Overlay for images */
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(233, 30, 99, 0.9) 0%, transparent 100%);
+            padding: 20px 15px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-text {
+            color: white;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Placeholder icon when no image */
+        .gallery-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* Question Section */
+        .question-section {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe8ed 100%);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 50px auto;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(233, 30, 99, 0.2);
+            animation: scaleIn 1s ease-out;
+            border: 3px solid #ffc1d4;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .question-section h2 {
+            font-size: 2.8em;
+            background: linear-gradient(135deg, #e91e63 0%, #f50057 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+            font-weight: 700;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .question-text {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 50px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* Buttons Container */
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            min-height: 120px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 22px 55px;
+            font-size: 1.6em;
+            font-weight: 700;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            min-width: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            transform-origin: center;
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-yes:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, #a8a8a8 0%, #7f7f7f 100%);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-no:hover {
+            background: linear-gradient(135deg, #7f7f7f 0%, #a8a8a8 100%);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(127, 127, 127, 0.4);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            animation: fadeInScale 0.8s ease-out;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-message h2 {
+            font-size: 3.5em;
+            background: linear-gradient(135deg, #e91e63 0%, #f50057 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .success-message p {
+            font-size: 1.7em;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .celebration {
+            font-size: 6em;
+            animation: rotate 1s infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .emoji-row {
+            margin-top: 30px;
+            font-size: 3.5em;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .header p {
+                font-size: 1.2em;
+            }
+
+            /* Keep 2 columns on mobile */
+            .gallery {
+                gap: 10px;
+                padding: 0 10px;
+                margin-bottom: 40px;
+            }
+
+            .gallery-item {
+                padding-top: 140%; /* Slightly taller on mobile for better viewing */
+            }
+
+            .gallery-text {
+                font-size: 0.9em;
+            }
+
+            .gallery-placeholder {
+                font-size: 50px;
+            }
+
+            .question-section {
+                padding: 40px 20px;
+                margin: 30px auto;
+            }
+
+            .question-section h2 {
+                font-size: 2em;
+            }
+
+            .question-text {
+                font-size: 1.4em;
+                margin-bottom: 35px;
+            }
+
+            .btn {
+                padding: 16px 35px;
+                font-size: 1.2em;
+                min-width: 140px;
+            }
+
+            .buttons-container {
+                gap: 15px;
+            }
+
+            .success-message h2 {
+                font-size: 2.5em;
+            }
+
+            .success-message p {
+                font-size: 1.3em;
+            }
+
+            .celebration {
+                font-size: 4em;
+            }
+
+            .emoji-row {
+                font-size: 2.5em;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .gallery {
+                gap: 8px;
+            }
+
+            .gallery-item {
+                border-radius: 12px;
+            }
+
+            .gallery-text {
+                font-size: 0.85em;
+                padding: 10px 5px;
+            }
+
+            .gallery-placeholder {
+                font-size: 40px;
+            }
+
+            .question-section {
+                padding: 30px 15px;
+            }
+
+            .question-section h2 {
+                font-size: 1.6em;
+            }
+
+            .question-text {
+                font-size: 1.2em;
+            }
+
+            .btn {
+                padding: 14px 28px;
+                font-size: 1.1em;
+                min-width: 120px;
+            }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            animation: confetti-fall 3s linear infinite;
+            z-index: 9999;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Shake animation */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>💝 For Daniella 💝</h1>
+            <p>A special message from someone who cares...</p>
+        </div>
+
+        <!-- Photo Gallery Grid (2x3) -->
+        <div class="gallery">
+            <!-- Photo 1 - REPLACE WITH YOUR IMAGE -->
+            <div class="gallery-item">
+                <div class="gallery-content">
+                    <!-- UNCOMMENT AND ADD YOUR IMAGE PATH BELOW -->
+                    <img src="Picture1.jpeg" alt="Daniella Photo 1">
+                    <div class="gallery-placeholder">💕</div>
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-text">Beautiful Smile ✨</div>
+                </div>
+            </div>
+
+            <!-- Photo 2 - REPLACE WITH YOUR IMAGE -->
+            <div class="gallery-item">
+                <div class="gallery-content">
+                    <!-- UNCOMMENT AND ADD YOUR IMAGE PATH BELOW -->
+                    <img src="Picture2.jpeg" alt="Daniella Photo 2"> 
+                    <div class="gallery-placeholder">🌹</div>
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-text">Amazing Person 💖</div>
+                </div>
+            </div>
+
+            <!-- Photo 3 - REPLACE WITH YOUR IMAGE -->
+            <div class="gallery-item">
+                <div class="gallery-content">
+                    <!-- UNCOMMENT AND ADD YOUR IMAGE PATH BELOW -->
+                    <img src="Picture3.jpeg" alt="Daniella Photo 3">
+                    <div class="gallery-placeholder">💖</div>
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-text">Wonderful You 🌟</div>
+                </div>
+            </div>
+
+            <!-- Photo 4 - REPLACE WITH YOUR IMAGE -->
+            <div class="gallery-item">
+                <div class="gallery-content">
+                    <!-- UNCOMMENT AND ADD YOUR IMAGE PATH BELOW -->
+                 <img src="Picture4.jpeg" alt="Daniella Photo 4"> 
+                    <div class="gallery-placeholder">✨</div>
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-text">Simply Perfect 💕</div>
+                </div>
+            </div>
+
+            <!-- Photo 5 - REPLACE WITH YOUR IMAGE -->
+            <div class="gallery-item">
+                <div class="gallery-content">
+                    <!-- UNCOMMENT AND ADD YOUR IMAGE PATH BELOW -->
+                     <img src="Picture5.jpeg" alt="Daniella Photo 5"> 
+                    <div class="gallery-placeholder">🎀</div>
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-text">Absolutely Stunning 🌈</div>
+                </div>
+            </div>
+
+            <!-- Photo 6 - REPLACE WITH YOUR IMAGE -->
+            <div class="gallery-item">
+                <div class="gallery-content">
+                    <!-- UNCOMMENT AND ADD YOUR IMAGE PATH BELOW -->
+                <img src="Picture 6.jpeg" alt="Daniella Photo 6"> 
+                    <div class="gallery-placeholder">💝</div>
+                </div>
+                <div class="gallery-overlay">
+                    <div class="gallery-text">Forever Beautiful 💫</div>
+                </div>
+            </div>
+        </div>
+
+       <!-- Question Section -->
+       <div class="question-section">
+        <div id="questionContent">
+            <h2>❤️ The Big Question ❤️</h2>
+            <p class="question-text">Daniella, will you be my Valentine? 🌹</p>
+            
+            <div class="buttons-container">
+                <button class="btn btn-yes" id="yesBtn">Yes! 💕</button>
+                <button class="btn btn-no" id="noBtn">No</button>
+            </div>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <div class="celebration">🎉</div>
+            <h2>Yay! You said YES! 💖</h2>
+            <p>You just made me the happiest person ever! 😍</p>
+            <p>Can't wait to celebrate with you! 🥰</p>
+            <div class="emoji-row">
+                💑 ❤️ 💕 💖 💝
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Floating hearts animation
+    function createHeart() {
+        const heartsContainer = document.getElementById('heartsContainer');
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+        heart.style.fontSize = (Math.random() * 15 + 12) + 'px';
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 8000);
+    }
+
+    // Create hearts periodically
+    setInterval(createHeart, 500);
+
+    // Button functionality
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const questionContent = document.getElementById('questionContent');
+    const successMessage = document.getElementById('successMessage');
+
+    let noClickCount = 0;
+    let yesScale = 1;
+
+    // Array of messages when "No" is clicked
+    const noMessages = [
+        "Are you sure? 🥺",
+        "Please na... 🙏",
+        "Think about it 💭",
+        "Pretty please? 🥹",
+        "With sugar on top? 🍭",
+        "I'll be really happy 😊",
+        "You know you want to 😏",
+        "Come on now 😅",
+        "One more chance? 🎯",
+        "Okay, last time 😱"
+    ];
+
+    // Handle No button click
+    noBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Increase Yes button size
+        noClickCount++;
+        yesScale += 0.2;
+        yesBtn.style.transform = `scale(${yesScale})`;
+        yesBtn.style.transition = 'transform 0.3s ease';
+
+        // Change No button text
+        if (noClickCount < noMessages.length) {
+            noBtn.textContent = noMessages[noClickCount - 1];
+        } else {
+            noBtn.textContent = "Please na 😅";
+        }
+
+        // Make No button smaller with each click
+        const noScale = Math.max(0.3, 1 - (noClickCount * 0.1));
+        noBtn.style.transform = `scale(${noScale})`;
+        noBtn.style.transition = 'transform 0.3s ease';
+        
+        // Add shake animation
+        noBtn.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            noBtn.style.animation = '';
+        }, 500);
+
+        // Make No button more transparent as it gets smaller
+        if (noClickCount > 5) {
+            const opacity = Math.max(0.5, 1 - (noClickCount * 0.08));
+            noBtn.style.opacity = opacity;
+        }
+    });
+
+    // Handle Yes button click
+    yesBtn.addEventListener('click', function() {
+        // Hide question content
+        questionContent.style.display = 'none';
+        
+        // Show success message
+        successMessage.classList.add('show');
+
+        // Create confetti
+        createConfetti();
+
+        // Play celebration animation
+        celebrateSuccess();
+    });
+
+    // Create confetti effect
+    function createConfetti() {
+        const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffd700', '#ff69b4'];
+        
+        for (let i = 0; i < 150; i++) {
+            setTimeout(() => {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 12 + 6 + 'px';
+                confetti.style.height = confetti.style.width;
+                confetti.style.position = 'fixed';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }, i * 20);
+        }
+    }
+
+    // Celebration animation
+    function celebrateSuccess() {
+        const celebration = document.querySelector('.celebration');
+        const emojis = ['🎉', '🎊', '💖', '🎈', '⭐', '💝', '🌟', '💕'];
+        let index = 0;
+        
+        setInterval(() => {
+            celebration.innerHTML = emojis[index];
+            index = (index + 1) % emojis.length;
+        }, 400);
+    }
+
+    // Gallery item interactions
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    galleryItems.forEach((item, index) => {
+        // Initial animation
+        item.style.animation = `fadeIn 1s ease-out ${index * 0.15}s backwards`;
+        
+        // Click effect
+        item.addEventListener('click', function() {
+            this.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 300);
+        });
+    });
+</script>
